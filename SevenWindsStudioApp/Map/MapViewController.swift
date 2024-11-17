@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 import YandexMapsMobile
 
 final class MapViewController: UIViewController {
@@ -51,12 +52,12 @@ final class MapViewController: UIViewController {
         
         view.addSubview(mapView)
         
-        NSLayoutConstraint.activate([
-            mapView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            mapView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            mapView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            mapView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ])
+        mapView.snp.makeConstraints { make in
+            make.leading.equalToSuperview()
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            make.trailing.equalToSuperview()
+            make.bottom.equalToSuperview()
+        }
     }
     
     private func move(to firstPoint: Location?) {

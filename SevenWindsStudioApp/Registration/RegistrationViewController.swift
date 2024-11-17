@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 final class RegistrationViewController: UIViewController {
     
@@ -51,39 +52,52 @@ final class RegistrationViewController: UIViewController {
         
         views.forEach { view.addSubview($0) }
         
-        NSLayoutConstraint.activate([
-            emailLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 18),
-            emailLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 278),
-            emailLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -18),
-            
-            emailTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 18),
-            emailTextField.topAnchor.constraint(equalTo: emailLabel.bottomAnchor, constant: 6),
-            emailTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -18),
-            emailTextField.heightAnchor.constraint(equalToConstant: 47),
-            
-            passwordLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 18),
-            passwordLabel.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 16),
-            passwordLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -18),
-            
-            passwordTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 18),
-            passwordTextField.topAnchor.constraint(equalTo: passwordLabel.bottomAnchor, constant: 6),
-            passwordTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -18),
-            passwordTextField.heightAnchor.constraint(equalToConstant: 47),
-            
-            repeatPasswordLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 18),
-            repeatPasswordLabel.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 16),
-            repeatPasswordLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -18),
-            
-            repeatPasswordTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 18),
-            repeatPasswordTextField.topAnchor.constraint(equalTo: repeatPasswordLabel.bottomAnchor, constant: 6),
-            repeatPasswordTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -18),
-            repeatPasswordTextField.heightAnchor.constraint(equalToConstant: 47),
-            
-            registrationButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 18),
-            registrationButton.topAnchor.constraint(equalTo: repeatPasswordTextField.bottomAnchor, constant: 26),
-            registrationButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -18),
-            registrationButton.heightAnchor.constraint(equalToConstant: 47),
-        ])
+        
+        emailLabel.snp.makeConstraints { make in
+            make.leading.equalTo(view.snp.leading).offset(18)
+            make.top.equalTo(view.snp.top).offset(278)
+            make.trailing.equalTo(view.snp.trailing).offset(-18)
+        }
+        
+        emailTextField.snp.makeConstraints { make in
+            make.leading.equalTo(view.snp.leading).offset(18)
+            make.top.equalTo(emailLabel.snp.bottom).offset(6)
+            make.trailing.equalTo(view.snp.trailing).offset(-18)
+            make.height.equalTo(47)
+        }
+        
+        passwordLabel.snp.makeConstraints { make in
+            make.leading.equalTo(view.snp.leading).offset(18)
+            make.top.equalTo(emailTextField.snp.bottom).offset(16)
+            make.trailing.equalTo(view.snp.trailing).offset(-18)
+        }
+        
+        passwordTextField.snp.makeConstraints { make in
+            make.leading.equalTo(view.snp.leading).offset(18)
+            make.top.equalTo(passwordLabel.snp.bottom).offset(6)
+            make.trailing.equalTo(view.snp.trailing).offset(-18)
+            make.height.equalTo(47)
+        }
+        
+        repeatPasswordLabel.snp.makeConstraints { make in
+            make.leading.equalTo(view.snp.leading).offset(18)
+            make.top.equalTo(passwordTextField.snp.bottom).offset(16)
+            make.trailing.equalTo(view.snp.trailing).offset(-18)
+        }
+        
+        repeatPasswordTextField.snp.makeConstraints { make in
+            make.leading.equalTo(view.snp.leading).offset(18)
+            make.top.equalTo(repeatPasswordLabel.snp.bottom).offset(6)
+            make.trailing.equalTo(view.snp.trailing).offset(-18)
+            make.height.equalTo(47)
+        }
+
+        registrationButton.snp.makeConstraints { make in
+            make.leading.equalTo(view.snp.leading).offset(18)
+            make.top.equalTo(repeatPasswordTextField.snp.bottom).offset(26)
+            make.trailing.equalTo(view.snp.trailing).offset(-18)
+            make.height.equalTo(47)
+        }
     }
     
     private func isValidPassword(password: String) -> Bool {

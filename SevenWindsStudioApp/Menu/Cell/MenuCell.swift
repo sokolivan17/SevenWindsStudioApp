@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 final class MenuCell: UICollectionViewCell {
     
@@ -72,31 +73,38 @@ final class MenuCell: UICollectionViewCell {
         containerView.addSubview(coffeePriceLabel)
         containerView.addSubview(plusMinusView)
         
-        NSLayoutConstraint.activate([
-            containerView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            containerView.topAnchor.constraint(equalTo: topAnchor),
-            containerView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            containerView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            
-            
-            coffeeImageView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
-            coffeeImageView.topAnchor.constraint(equalTo: containerView.topAnchor),
-            coffeeImageView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
-            coffeeImageView.heightAnchor.constraint(equalToConstant: 130),
-            
-            coffeeNameLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 10),
-            coffeeNameLabel.topAnchor.constraint(equalTo: coffeeImageView.bottomAnchor, constant: 6),
-            coffeeNameLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -10),
-            
-            coffeePriceLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 10),
-            coffeePriceLabel.centerYAnchor.constraint(equalTo: plusMinusView.centerYAnchor),
-            coffeePriceLabel.trailingAnchor.constraint(equalTo: plusMinusView.leadingAnchor, constant: -10),
-            
-            plusMinusView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -6),
-            plusMinusView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -6),
-            plusMinusView.widthAnchor.constraint(equalToConstant: 70),
-            plusMinusView.heightAnchor.constraint(equalToConstant: 30)
-        ])
+        containerView.snp.makeConstraints { make in
+            make.leading.equalToSuperview()
+            make.top.equalToSuperview()
+            make.trailing.equalToSuperview()
+            make.bottom.equalToSuperview()
+        }
+        
+        coffeeImageView.snp.makeConstraints { make in
+            make.leading.equalToSuperview()
+            make.top.equalToSuperview()
+            make.trailing.equalToSuperview()
+            make.height.equalTo(130)
+        }
+        
+        coffeeNameLabel.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(10)
+            make.top.equalTo(coffeeImageView.snp.bottom).offset(6)
+            make.trailing.equalToSuperview().offset(-10)
+        }
+        
+        coffeePriceLabel.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(10)
+            make.centerY.equalTo(plusMinusView.snp.centerY)
+            make.trailing.equalTo(plusMinusView.snp.leading).offset(-10)
+        }
+        
+        plusMinusView.snp.makeConstraints { make in
+            make.bottom.equalToSuperview().offset(-6)
+            make.trailing.equalToSuperview().offset(-6)
+            make.width.equalTo(70)
+            make.height.equalTo(30)
+        }
     }
     
     override func prepareForReuse() {

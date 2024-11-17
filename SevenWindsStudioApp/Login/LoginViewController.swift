@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 final class LoginViewController: UIViewController {
     
@@ -45,30 +46,38 @@ final class LoginViewController: UIViewController {
         
         views.forEach { view.addSubview($0) }
         
-        NSLayoutConstraint.activate([
-            emailLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 18),
-            emailLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 278),
-            emailLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -18),
-            
-            emailTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 18),
-            emailTextField.topAnchor.constraint(equalTo: emailLabel.bottomAnchor, constant: 6),
-            emailTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -18),
-            emailTextField.heightAnchor.constraint(equalToConstant: 47),
-            
-            passwordLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 18),
-            passwordLabel.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 16),
-            passwordLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -18),
-            
-            passwordTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 18),
-            passwordTextField.topAnchor.constraint(equalTo: passwordLabel.bottomAnchor, constant: 6),
-            passwordTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -18),
-            passwordTextField.heightAnchor.constraint(equalToConstant: 47),
-            
-            loginButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 18),
-            loginButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 26),
-            loginButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -18),
-            loginButton.heightAnchor.constraint(equalToConstant: 47),
-        ])
+        emailLabel.snp.makeConstraints { make in
+            make.leading.equalTo(view.snp.leading).offset(18)
+            make.top.equalTo(view.snp.top).offset(278)
+            make.trailing.equalTo(view.snp.trailing).offset(-18)
+        }
+        
+        emailTextField.snp.makeConstraints { make in
+            make.leading.equalTo(view.snp.leading).offset(18)
+            make.top.equalTo(emailLabel.snp.bottom).offset(6)
+            make.trailing.equalTo(view.snp.trailing).offset(-18)
+            make.height.equalTo(47)
+        }
+        
+        passwordLabel.snp.makeConstraints { make in
+            make.leading.equalTo(view.snp.leading).offset(18)
+            make.top.equalTo(emailTextField.snp.bottom).offset(16)
+            make.trailing.equalTo(view.snp.trailing).offset(-18)
+        }
+        
+        passwordTextField.snp.makeConstraints { make in
+            make.leading.equalTo(view.snp.leading).offset(18)
+            make.top.equalTo(passwordLabel.snp.bottom).offset(6)
+            make.trailing.equalTo(view.snp.trailing).offset(-18)
+            make.height.equalTo(47)
+        }
+        
+        loginButton.snp.makeConstraints { make in
+            make.leading.equalTo(view.snp.leading).offset(18)
+            make.top.equalTo(passwordTextField.snp.bottom).offset(26)
+            make.trailing.equalTo(view.snp.trailing).offset(-18)
+            make.height.equalTo(47)
+        }
     }
     
     @objc private func loginButtonTapped() {

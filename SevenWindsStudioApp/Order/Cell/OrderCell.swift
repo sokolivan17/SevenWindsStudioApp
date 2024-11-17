@@ -45,25 +45,31 @@ final class OrderCell: UICollectionViewCell {
         containerView.addSubview(coffeePriceLabel)
         containerView.addSubview(plusMinusView)
         
-        NSLayoutConstraint.activate([
-            containerView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-            containerView.topAnchor.constraint(equalTo: topAnchor),
-            containerView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
-            containerView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -6),
-            
-            coffeeNameLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 10),
-            coffeeNameLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 14),
-            coffeeNameLabel.trailingAnchor.constraint(equalTo: plusMinusView.leadingAnchor, constant: -10),
-            
-            coffeePriceLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 10),
-            coffeePriceLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 41),
-            coffeePriceLabel.trailingAnchor.constraint(equalTo: plusMinusView.leadingAnchor, constant: -10),
-            
-            plusMinusView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -10),
-            plusMinusView.centerYAnchor.constraint(equalTo: containerView.centerYAnchor),
-            plusMinusView.heightAnchor.constraint(equalToConstant: 30),
-            plusMinusView.widthAnchor.constraint(equalToConstant: 70)
-        ])
+        containerView.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(10)
+            make.top.equalToSuperview()
+            make.trailing.equalToSuperview().offset(-10)
+            make.bottom.equalToSuperview().offset(-6)
+        }
+        
+        coffeeNameLabel.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(10)
+            make.top.equalToSuperview().offset(14)
+            make.trailing.equalTo(plusMinusView.snp.leading).offset(-10)
+        }
+        
+        coffeePriceLabel.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(10)
+            make.top.equalToSuperview().offset(41)
+            make.trailing.equalTo(plusMinusView.snp.leading).offset(-10)
+        }
+
+        plusMinusView.snp.makeConstraints { make in
+            make.trailing.equalToSuperview().offset(-10)
+            make.centerY.equalToSuperview()
+            make.width.equalTo(70)
+            make.height.equalTo(30)
+        }
     }
     
     public func set(name: String, price: Int, counter: Int) {

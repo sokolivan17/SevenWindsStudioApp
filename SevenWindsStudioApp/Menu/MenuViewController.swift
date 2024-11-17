@@ -56,17 +56,19 @@ final class MenuViewController: UIViewController {
         view.addSubview(collectionView)
         view.addSubview(menuButton)
         
-        NSLayoutConstraint.activate([
-            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: menuButton.topAnchor, constant: -10),
-            
-            menuButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 19),
-            menuButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            menuButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -19),
-            menuButton.heightAnchor.constraint(equalToConstant: 48),
-        ])
+        collectionView.snp.makeConstraints { make in
+            make.leading.equalToSuperview()
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(20)
+            make.trailing.equalToSuperview()
+            make.bottom.equalTo(menuButton.snp.top).offset(-10)
+        }
+        
+        menuButton.snp.makeConstraints { make in
+            make.leading.equalTo(view.snp.leading).offset(19)
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
+            make.trailing.equalTo(view.snp.trailing).offset(-19)
+            make.height.equalTo(48)
+        }
     }
     
     private func returnTokenIfExists() -> String {

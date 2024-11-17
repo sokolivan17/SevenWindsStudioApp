@@ -11,7 +11,9 @@ final class OrderViewController: UIViewController {
     
     private var selectedCards: [OrderItem] = [] {
         didSet {
-            collectionView.reloadData()
+            DispatchQueue.main.async { [weak self] in
+                self?.collectionView.reloadData()
+            }
         }
     }
     
@@ -78,22 +80,26 @@ final class OrderViewController: UIViewController {
         
         views.forEach { view.addSubview($0) }
         
-        NSLayoutConstraint.activate([
-            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: orderLabel.topAnchor, constant: -10),
-            
-            orderLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 13),
-            orderLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 486),
-            orderLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -13),
-            orderLabel.heightAnchor.constraint(equalToConstant: 87),
-            
-            orderButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 19),
-            orderButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -19),
-            orderButton.heightAnchor.constraint(equalToConstant: 48),
-            orderButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
-        ])
+        collectionView.snp.makeConstraints { make in
+            make.leading.equalToSuperview()
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(20)
+            make.trailing.equalToSuperview()
+            make.bottom.equalTo(orderLabel.snp.top).offset(-10)
+        }
+        
+        orderLabel.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(13)
+            make.top.equalTo(view.snp.top).offset(486)
+            make.trailing.equalToSuperview().offset(-13)
+            make.height.equalTo(87)
+        }
+        
+        orderButton.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(19)
+            make.trailing.equalToSuperview().offset(-19)
+            make.height.equalTo(48)
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
+        }
     }
     
     private func addMenuItemModel(menuItem: OrderItem, counter: Int) {

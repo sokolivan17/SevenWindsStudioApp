@@ -35,6 +35,7 @@
 		B5C5DA732CDE06D50036BF01 /* OrderItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C5DA722CDE06D50036BF01 /* OrderItem.swift */; };
 		B5C5DA7E2CDE0C7C0036BF01 /* URLStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C5DA7D2CDE0C7C0036BF01 /* URLStrings.swift */; };
 		B5C5DA802CDE0CA50036BF01 /* CoffeeError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C5DA7F2CDE0CA50036BF01 /* CoffeeError.swift */; };
+		B5C5DA842CE8D54A0036BF01 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = B5C5DA832CE8D54A0036BF01 /* SnapKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,6 +77,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5C5DA842CE8D54A0036BF01 /* SnapKit in Frameworks */,
 				B5B57E5A2CD2143C0091A1FC /* Alamofire in Frameworks */,
 				B444C64AC0CDF442D0B0DFEA /* Pods_SevenWindsStudioApp.framework in Frameworks */,
 			);
@@ -293,6 +295,7 @@
 			name = SevenWindsStudioApp;
 			packageProductDependencies = (
 				B5B57E592CD2143C0091A1FC /* Alamofire */,
+				B5C5DA832CE8D54A0036BF01 /* SnapKit */,
 			);
 			productName = SevenWindsStudioApp;
 			productReference = B5B57E412CD213560091A1FC /* SevenWindsStudioApp.app */;
@@ -324,6 +327,7 @@
 			mainGroup = B5B57E382CD213560091A1FC;
 			packageReferences = (
 				B5B57E582CD2143B0091A1FC /* XCRemoteSwiftPackageReference "Alamofire" */,
+				B5C5DA822CE8D54A0036BF01 /* XCRemoteSwiftPackageReference "SnapKit" */,
 			);
 			productRefGroup = B5B57E422CD213560091A1FC /* Products */;
 			projectDirPath = "";
@@ -647,6 +651,14 @@
 				minimumVersion = 5.10.1;
 			};
 		};
+		B5C5DA822CE8D54A0036BF01 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -654,6 +666,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B5B57E582CD2143B0091A1FC /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		B5C5DA832CE8D54A0036BF01 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B5C5DA822CE8D54A0036BF01 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

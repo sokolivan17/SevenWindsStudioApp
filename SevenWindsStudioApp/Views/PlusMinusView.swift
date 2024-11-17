@@ -68,22 +68,25 @@ final class PlusMinusView: UIView {
         
         views.forEach { addSubview($0) }
         
-        NSLayoutConstraint.activate([
-            countLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-            countLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-            countLabel.widthAnchor.constraint(equalToConstant: 10),
-            
-            minusButton.centerYAnchor.constraint(equalTo: centerYAnchor),
-            minusButton.widthAnchor.constraint(equalToConstant: 24),
-            minusButton.heightAnchor.constraint(equalToConstant: 24),
-            minusButton.trailingAnchor.constraint(equalTo: countLabel.leadingAnchor, constant: -6),
-            
-            plusButton.leadingAnchor.constraint(equalTo: countLabel.trailingAnchor, constant: 6),
-            plusButton.centerYAnchor.constraint(equalTo: centerYAnchor),
-            plusButton.widthAnchor.constraint(equalToConstant: 24),
-            plusButton.heightAnchor.constraint(equalToConstant: 24),
-            
-        ])
+        countLabel.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.centerX.equalToSuperview()
+            make.width.equalTo(10)
+        }
+        
+        minusButton.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.width.equalTo(24)
+            make.height.equalTo(24)
+            make.trailing.equalTo(countLabel.snp.leading).offset(-6)
+        }
+        
+        plusButton.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.width.equalTo(24)
+            make.height.equalTo(24)
+            make.leading.equalTo(countLabel.snp.trailing).offset(6)
+        }
     }
     
     public func set(count: Int) {

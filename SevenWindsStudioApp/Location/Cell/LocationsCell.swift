@@ -57,20 +57,25 @@ final class LocationsCell: UITableViewCell {
         containerView.addSubview(coffeeNameLabel)
         containerView.addSubview(coffeeLocationLabel)
         
-        NSLayoutConstraint.activate([
-            containerView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-            containerView.topAnchor.constraint(equalTo: topAnchor),
-            containerView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
-            containerView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -6),
-            
-            coffeeNameLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 10),
-            coffeeNameLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 14),
-            coffeeNameLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -10),
-            
-            coffeeLocationLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 10),
-            coffeeLocationLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 41),
-            coffeeLocationLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -10),
-        ])
+        
+        containerView.snp.makeConstraints { make in
+            make.leading.equalTo(snp.leading).offset(10)
+            make.top.equalTo(snp.top)
+            make.trailing.equalTo(snp.trailing).offset(-10)
+            make.bottom.equalTo(snp.bottom).offset(-6)
+        }
+        
+        coffeeNameLabel.snp.makeConstraints { make in
+            make.leading.equalTo(containerView.snp.leading).offset(10)
+            make.top.equalTo(containerView.snp.top).offset(14)
+            make.trailing.equalTo(containerView.snp.trailing).offset(-10)
+        }
+        
+        coffeeLocationLabel.snp.makeConstraints { make in
+            make.leading.equalTo(containerView.snp.leading).offset(10)
+            make.top.equalTo(containerView.snp.top).offset(41)
+            make.trailing.equalTo(containerView.snp.trailing).offset(-10)
+        }
     }
     
     public func set(coffeeName: String, coffeeLocation: Point, currentLocation: CLLocationCoordinate2D?) {

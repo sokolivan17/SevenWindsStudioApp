@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 import CoreLocation
 
 final class LocationsViewController: UIViewController {
@@ -14,7 +15,9 @@ final class LocationsViewController: UIViewController {
     private let locationManager = CLLocationManager()
     private var currentLocation: CLLocationCoordinate2D? {
         didSet {
-            tableView.reloadData()
+            DispatchQueue.main.async { [weak self] in
+                self?.tableView.reloadData()
+            }
         }
     }
     
@@ -66,7 +69,9 @@ final class LocationsViewController: UIViewController {
             switch result {
             case .success(let coffeePoints):
                 self.locations = coffeePoints
-                self.tableView.reloadData()
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
             case .failure(let error):
                 print("Get locations error: \(error)")
                 getNewToken()
@@ -94,17 +99,19 @@ final class LocationsViewController: UIViewController {
         
         views.forEach { view.addSubview($0) }
         
-        NSLayoutConstraint.activate([
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: mapButton.topAnchor, constant: -10),
-            
-            mapButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 19),
-            mapButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            mapButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -19),
-            mapButton.heightAnchor.constraint(equalToConstant: 48),
-        ])
+        tableView.snp.makeConstraints { make in
+            make.leading.equalTo(view.snp.leading)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(20)
+            make.trailing.equalTo(view.snp.trailing)
+            make.bottom.equalTo(mapButton.snp.top).offset(-10)
+        }
+        
+        mapButton.snp.makeConstraints { make in
+            make.leading.equalTo(view.snp.leading).offset(19)
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
+            make.trailing.equalTo(view.snp.trailing).offset(-19)
+            make.height.equalTo(48)
+        }
     }
     
     @objc private func mapButtonTapped() {
